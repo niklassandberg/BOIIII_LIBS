@@ -1,5 +1,5 @@
-#ifndef _BO_UTILS_H
-#define _BO_UTILS_H
+#ifndef _BO_TEST_MEM_H
+#define _BO_TEST_MEM_H
 
 //Get free ram (function found at sparkfun)
 int freeRam ()
