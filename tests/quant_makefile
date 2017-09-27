@@ -1,0 +1,21 @@
+OBJS = quant_test.o quant.o arduinomock.o
+CC = g++
+DEBUG = 
+CFLAGS = -Wall -DMOCK_ARDUINO -c $(DEBUG)
+LFLAGS = -Wall -DMOCK_ARDUINO $(DEBUG)
+
+quant_test : $(OBJS)
+	$(CC) $(LFLAGS) $(OBJS) -o quant_test
+
+quant.o : quant.h arduinomock.h
+	$(CC) $(CFLAGS) quant.cpp
+
+
+
+arduinomock.o : arduinomock.h arduinomock.cpp
+	$(CC) $(CFLAGS) arduinomock.cpp
+
+all : quant_test
+
+clean :
+	rm -rf ./*.o quant_test
