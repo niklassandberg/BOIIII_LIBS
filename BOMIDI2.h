@@ -34,7 +34,7 @@ bool between(uint8_t value)
 
 
 template<uint8_t LOWVAL,uint8_t HIGHVAL>
-inline bool between(MIDIEvent& e)
+inline bool keyBetween(MIDIEvent& e)
 {
   return between<LOWVAL,HIGHVAL>(e.m2);
 }
