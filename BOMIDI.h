@@ -22,26 +22,26 @@ bool returnTrue(MIDIEvent& e)
 	return true;
 }
 
-template<int LOWVAL,int HIGHVAL>
-bool mTwoBetween(MIDIEvent& e)
+template<uint8_t LOWVAL,uint8_t HIGHVAL>
+bool between(uint8_t value)
 {
-  if(HIGHVAL < e.m2 || e.m2 < LOWVAL)
-    return false;
-  else
+  if(HIGHVAL >= value && value >= LOWVAL)
     return true;
+  else
+    return false;
 }
 
 
-template<int LOWVAL,int HIGHVAL>
+template<uint8_t LOWVAL,uint8_t HIGHVAL>
 inline bool keyBetween(MIDIEvent& e)
 {
-  return mTwoBetween<LOWVAL,HIGHVAL>(e);
+  return between<LOWVAL,HIGHVAL>(e.m2);
 }
 
-template<int LOWVAL,int HIGHVAL>
+template<uint8_t LOWVAL,uint8_t HIGHVAL>
 bool controlBetween(MIDIEvent& e) 
 {
-  return mTwoBetween<LOWVAL,HIGHVAL>(e);
+  return between<LOWVAL,HIGHVAL>(e.m2);
 }
 
 struct BoMidiFilter
