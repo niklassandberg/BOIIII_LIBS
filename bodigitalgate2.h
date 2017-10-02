@@ -3,41 +3,38 @@
 
 class DigitalGate
 {
+    typedef void(*changedf_t)(bool);
+    typedef void(*not_changedf_t)(void);
+
     uint8_t mInputPin;
     uint8_t mPrevValue;
-    uint8_t mValue;
     bool mChanged;
+
+    changedf_t mChangedFunc;
+    not_changedf_t mNotChangedFunc;
+
   public:
-    DigitalGate(uint8_t inputPin) :
-      mInputPin(inputPin), mPrevValue(LOW), mValue(LOW), mChanged(false)
+    DigitalGate(uint8_t inputPin, changedf_t changedfunc, not_changedf_t notchangedfunc) :
+      mInputPin(inputPin), mPrevValue(LOW), mChanged(false),
+      mChangedFunc(changedfunc), mNotChangedFunc(notchangedfunc)
     {
       pinMode( inputPin, INPUT );
     }
 
-    bool operator()()
+    void operator()()
     {
       uint8_t value = digitalRead(mInputPin);
       if ( value != mPrevValue )
       {
-        mValue = value;
+        mChangedFunc(value==HIGH);
         mChanged = true;
       }
-      else
+      else if(mChanged)
       {
+        mNotChangedFunc();
         mChanged = false;
       }
       mPrevValue = value;
-      return mChanged;
-    }
-
-    bool changed()
-    {
-      return mChanged;
-    }
-
-    bool high()
-    {
-      return mValue == HIGH;
     }
 };
 

@@ -68,6 +68,11 @@ class array_container
         return mValues[mLength-1];
     }
 
+    void clear()
+    {
+        mLength = 0; 
+    }
+
     bool empty()
     {
         return mLength == 0;
