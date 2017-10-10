@@ -1,11 +1,11 @@
 #ifndef _BO_ARRAY_CONTAINER_H_
 #define _BO_ARRAY_CONTAINER_H_
 
-template<typename T, int SIZE>
+template<typename T, size_t SIZE>
 class array_container
 {
     T mValues[SIZE];
-    int mLength;
+    size_t mLength;
 
     public:
 

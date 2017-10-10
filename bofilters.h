@@ -1,10 +1,20 @@
 #ifndef _BO_FILTER_H_
 #define _BO_FILTER_H_
 
-#include "Arduino.h"
+#ifdef MOCK_ARDUINO
+#include <arduinomock.h>
+#else
+#include <Arduino.h>
+#endif
 
-void keyGlide1( uint16_t in, uint16_t& out, uint16_t factor );
-void keyGlide2( uint16_t in, uint16_t & out, uint16_t factor );
+#include <bomath.h>
+
+void toneSlide( int16_t in, int16_t& out, int8_t midiCC );
+
+// in - ADC value (key value)
+// out - ADC value (key slide value)
+// midiCc - 0 indecates no tone slide => 127 max tone slide
+void toneSlide2( int16_t in, int16_t & out, int8_t midiCC );
 
 template<uint8_t MINNOTE, uint8_t MAXNOTE, uint8_t DAC_SEMI_TONE, uint16_t MAX_DAC_KEY>
 uint16_t midikeyToDac(uint8_t midiVal)
