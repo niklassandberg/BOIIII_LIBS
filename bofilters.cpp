@@ -21,7 +21,7 @@ void toneSlide( int16_t in, int16_t& out, int8_t midiCC )
 }
 
 
-void keyGlide2(int16_t in, int16_t & out, int8_t midiCC)
+void toneSlide2(int16_t in, int16_t & out, int8_t midiCC)
 {
   static int16_t accumilator = 0;
   if(midiCC==0) 
