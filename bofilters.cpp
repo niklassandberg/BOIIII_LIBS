@@ -1,6 +1,9 @@
 #include <bofilters.h>
 
-void toneSlide( int16_t in, int16_t& out, int8_t midiCC )
+#ifndef _BO_FILTERS_H_
+#define _BO_FILTERS_H_
+
+void inline toneSlide( int16_t in, int16_t& out, uint8_t midiCC )
 {
   if(midiCC < 1) { out = in; return; }
   else if(in==out) { return; }
@@ -21,7 +24,7 @@ void toneSlide( int16_t in, int16_t& out, int8_t midiCC )
 }
 
 
-void toneSlide2(int16_t in, int16_t & out, int8_t midiCC)
+void inline toneSlide2(int16_t in, int16_t & out, uint8_t midiCC)
 {
   static int16_t accumilator = 0;
   if(midiCC < 1) { out = in; return; }
@@ -31,3 +34,5 @@ void toneSlide2(int16_t in, int16_t & out, int8_t midiCC)
   out = mulu8x16div8_16( midiCC << 1, accumilator);
   accumilator = accumilator - out + in;
 }
+
+#endif
