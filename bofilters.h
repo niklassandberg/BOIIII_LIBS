@@ -9,12 +9,17 @@
 
 #include <bomath.h>
 
-void inline toneSlide( int16_t in, int16_t & out, uint8_t midiCC );
+// in - ADC value (key value)
+// out - ADC value (key slide value)
+// factor - 255 indecates no tone slide, 0 max tone slide
+void inline toneSlide( int16_t in, int16_t & out, uint8_t factor );
 
 // in - ADC value (key value)
 // out - ADC value (key slide value)
-// midiCc - 0 indecates no tone slide => 127 max tone slide
+// midiCC - 0 indecates no tone slide, 127 max tone slide
 void inline toneSlide2( int16_t in, int16_t & out, uint8_t midiCC );
+
+void inline toneSlide3( int16_t in, int16_t & out, uint8_t midiCC );
 
 template<uint8_t MINNOTE, uint8_t MAXNOTE, uint8_t DAC_SEMI_TONE, uint16_t MAX_DAC_KEY>
 uint16_t inline midikeyToDac(uint8_t midiVal)
